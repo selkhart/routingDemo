@@ -1,0 +1,12 @@
+{
+  "name":"selkhart/328/routingDemo",
+  "authors":[
+    {
+      "name":"Sarah Elkhart",
+      "email":"selkhart@mail.greenriver.edu"
+    }
+  ],
+  "require":{
+    "bcosca/fatfree-core":"dev-master"
+  }
+}
