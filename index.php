@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //error_reporting(E_ALL);
 //set("display_errors", 1);
 
@@ -53,9 +53,9 @@ $f3->route('GET /hello/@name',
 //    echo"<h1>Hello, $name</h1>";
 
         //the set function saves information into the 'hive' in fat free
-$f3->set('name',$params['name']);
-$template = new Template();
-echo $template->render('views/hello.html');
+        $f3->set('name',$params['name']);
+        $template = new Template();
+        echo $template->render('views/hello.html');
     });
 
 //define a route using parameters
@@ -67,9 +67,38 @@ $f3->route('GET /hi/@first/@last',
         $f3->set('last',$params['last']);
         $f3->set('message', 'Hola');
 
+        //storing the parameters into a session variable
+        $_SESSION['first'] = $f3->get('first');
+        $_SESSION['last'] = $f3->get('last');
+
         $template = new Template();
         echo $template->render('views/hi.html');
     });
+$f3->route('GET /hi-again',
+    function($f3, $params){
+        echo 'Hi again, '.$_SESSION['first'];
+    });
+
+$f3->route('GET /language/@lang',
+    function($f3, $params) {
+        switch ($params['lang']) {
+            case 'farsi':
+                echo 'Salam!';
+                break;
+            case 'spanish':
+                echo 'Hola!';
+                break;
+
+            //reroute to another page
+            case 'french':
+                $f3->reroute('/');
+
+            //set default route to 404 error
+            default:
+                $f3->error(404);
+        }
+    }
+);
 
 
 //run fat free
