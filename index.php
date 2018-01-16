@@ -1,7 +1,7 @@
 <?php
 
-error_reporting(E_ALL);
-set("display_errors", 1);
+//error_reporting(E_ALL);
+//set("display_errors", 1);
 
 //require the autoload file
 require_once('vendor/autoload.php');
@@ -45,7 +45,31 @@ $f3->route('GET /jewelry/rings/toe-rings', function(){
 //    echo '<h1>Toe Rings</h1>';
 });
 
+//define a route using parameters
+$f3->route('GET /hello/@name',
+    function($f3, $params){
 
+//    $name = $params['name'];
+//    echo"<h1>Hello, $name</h1>";
+
+        //the set function saves information into the 'hive' in fat free
+$f3->set('name',$params['name']);
+$template = new Template();
+echo $template->render('views/hello.html');
+    });
+
+//define a route using parameters
+$f3->route('GET /hi/@first/@last',
+    function($f3, $params){
+
+        //the set function saves information into the 'hive' in fat free
+        $f3->set('first',$params['first']);
+        $f3->set('last',$params['last']);
+        $f3->set('message', 'Hola');
+
+        $template = new Template();
+        echo $template->render('views/hi.html');
+    });
 
 
 //run fat free
