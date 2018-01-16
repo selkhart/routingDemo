@@ -36,14 +36,17 @@ $f3->route('GET /page2', function(){
     echo '<h1>This is page 2</h1>';
 });
 
-////define a route for toe-rings in jewelry/rings subfolders
-//$f3->route('GET /jewelry/rings/toe-rings', function(){
-//    echo '<h1>Toe Rings</h1>';
-//});
+//define a route for toe-rings in jewelry/rings subfolders
+$f3->route('GET /jewelry/rings/toe-rings', function(){
 
-//instantiate a template to integrate data into page easier
-$template = new Template();
-echo $template->remder('views/toe-rings.html');
+    //instantiate a template to integrate data into page easier
+    $template = new Template();
+    echo $template->render('views/toe-rings.html');
+//    echo '<h1>Toe Rings</h1>';
+});
+
+
+
 
 //run fat free
 $f3->run();
